@@ -26,6 +26,16 @@ public:
 	int range(int l ,int r){
 		return sum(r)-sum(l-1);
 	}
+	int find(int val){
+		int ind=0, prev=0;
+		for(int i = log2(n);i>=0;i--){
+			if(fen[ind+(1<<i)] +prev<val){
+				ind=ind+(1<<i);
+				prev+=fen[ind];	
+			}
+		}
+		return ind;
+	}
 };
 int main(){
 	int n ;
