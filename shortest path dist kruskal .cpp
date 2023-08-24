@@ -1,6 +1,41 @@
 # cpp
 #include<bits/stdc++.h>
 using namespace std;
+#include <bits/stdc++.h> 
+int mazeRunner(int n, int m, vector<vector<int>> &maze, vector<int> &start, vector<int> &destination) {
+    vector<int>dist(n*m+1,INT_MAX);
+    priority_queue<pair<int,pair<int,int>>,vector<pair<int,pair<int,int>>>,greater<pair<int,pair<int,int>>>>pq;
+    dist[start[0]*m+start[1]]=0;
+    pq.push({0,{start[0],start[1]}});
+    int xx[4]={0,0,-1,1};
+    int yy[4]={-1,1,0,0};
+    while(!pq.empty()){
+        int dis=pq.top().first;
+        int y=pq.top().second.first;
+        int x= pq.top().second.second;
+        pq.pop();
+        for(int i = 0 ; i< 4 ; i++){
+            int ny=y;
+            int nx=x;
+            int cnt=dis;
+            while(ny>=0 && nx>=0 &&ny<n && nx<m && maze[ny][nx]==0){
+                ny+=yy[i];
+                nx+=xx[i];
+                cnt++;
+            }
+            ny-=yy[i];
+            nx-=xx[i];
+            cnt--;
+            
+            if(cnt<dist[ny*m+nx]){
+                dist[ny*m+nx]=cnt;
+                pq.push({cnt,{ny,nx}});
+            }
+        }
+    }
+    if(dist[destination[0]*m+destination[1]]==INT_MAX)return -1;
+    else return dist[destination[0]*m+destination[1]];
+}  
 // void shortest10(vector<pair<int,int>>adj[],int n){
 // 	deque<pair<int,int>>dq;
 // 	dq.push_front({0,0});
