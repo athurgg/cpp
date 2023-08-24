@@ -10,6 +10,21 @@ void dfs(int vis[],vector<int>node[],int n,vector<int>&ans){
 	}
 	return;
 }
+void dfs(int vis[],vector<int>node[],queue<int>st,vector<int>&ans){
+	while(!st.empty()){
+		int n = st.front();
+		st.pop();
+		ans.push_back(n);
+		
+		for(int i = 0 ; i< node[n].size();i++){
+			if(!vis[node[n][i]]){
+				st.push(node[n][i]);
+				vis[node[n][i]]=1;	
+			}
+		}	
+	}
+	return;
+}
 int main(){
 	int n,e;
 	cin>>n>>e;
