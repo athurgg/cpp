@@ -2,6 +2,43 @@
 #include<bits/stdc++.h>
 using namespace std;
 #include <bits/stdc++.h> 
+int numberOfWays(int n, int m, vector<vector<int>> edges)
+{
+    vector<pair<int,int>>adj[n];
+
+    for(auto it:edges){
+        adj[it[0]].push_back({it[1],it[2]});
+        adj[it[1]].push_back({it[0],it[2]});
+    }
+    vector<int>mini(n,INT_MAX);
+    vector<int>ans(n);
+    mini[0]=0;
+    ans[0]=1;
+    priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>q;
+    q.push({0,0});
+    while(!q.empty()){
+        int val=q.top().first;
+        int node=q.top().second;
+        q.pop();
+        for(auto it : adj[node]){
+            int adjn=it.first;
+            int adjv=it.second;
+            if(mini[adjn]>adjv+val){
+                ans[adjn]=ans[node];
+                mini[adjn]=adjv+val;
+                q.push({mini[adjn],adjn});
+            }
+            else if(mini[adjn]==adjv+mini[node]){
+                ans[adjn]=(ans[adjn]+ans[node])%mod;
+                
+            }
+        }    
+        
+    }
+    return ans[n-1];
+
+
+}
 int mazeRunner(int n, int m, vector<vector<int>> &maze, vector<int> &start, vector<int> &destination) {
     vector<int>dist(n*m+1,INT_MAX);
     priority_queue<pair<int,pair<int,int>>,vector<pair<int,pair<int,int>>>,greater<pair<int,pair<int,int>>>>pq;
