@@ -1,3 +1,69 @@
+//buat tree di graph
+// #include<bits/stdc++.h>
+// using namespace std;
+// class disjoinsize{
+// public:
+// 	vector<int>parent,size;
+// 	disjoinsize(int n){
+// 		parent.resize(n);
+// 		size.resize(n,0);
+// 		for(int i = 0 ; i< n ; i++){
+// 			parent[i]=i;
+// 		}
+// 	}
+// 	int find(int n){
+// 		int p = n;
+// 		while (parent[p]!=p){
+// 			p=parent[p];
+// 		}
+// 		return parent[n]=p;
+// 	}
+// 	void uni(int a ,int b){
+// 		int n =find(a);
+// 		int m = find(b);
+// 		if(n==m)return;
+// 		if(size[n]>size[m]){			
+// 			parent[m]=n;
+// 			size[n]+=size[m];
+// 		}
+// 		else{
+// 			parent[n]=m;
+// 			size[m]+=size[n];
+// 		}
+// 	}	
+ 
+// };
+// int main(){
+// 	int n,m ;
+// 	cin>>n;
+// 	m=n-1;
+// 	disjoinsize ds(n);
+// 	queue<pair<int,int>>q;
+// 	for(int i = 0 ;i < m ; i++){
+// 		int u , v ;
+// 		cin>>u>>v;
+// 		u--;
+// 		v--;
+// 		if(ds.find(u)==ds.find(v)){
+// 			q.push({u,v});			
+// 		}
+// 		else{
+// 			ds.uni(u,v);
+// 		}
+// 	}
+// 	vector<int>parent;
+// 	for(int i = 0 ; i< n; i++){
+// 		if(ds.parent[i]==i)parent.push_back(i);
+// 	}
+// 	cout<<parent.size()-1<<endl;
+// 	for(int i =0 ; i<parent.size()-1;i++){
+// 		cout<<q.front().first+1<<" "<<q.front().second+1<<" "<<parent[i]+1<<" "<<parent[i+1]+1<<endl;
+// 		q.pop();
+// 	}
+// 	return 0;
+// }
+
+
 #include <bits/stdc++.h>
 class disjoinrank{
 	vector<int>parent,rank;
